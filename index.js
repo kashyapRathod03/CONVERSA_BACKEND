@@ -18,12 +18,12 @@ const db = mongoose.connect(process.env.MONGO_URL).then(()=>{console.log("databa
 const jwtSecret = process.env.JWT_SECRET;
 const bcryptSalt = bcrypt.genSaltSync(10);
 
+const app = express();
 app.use(express.static(path.join(__dirname,"./frontend/dist")));
 app.get("*",(req,res)=>{
     res.sendFile(path.join(__dirname,"./frontend/dist/index.html"))
 });
 
-const app = express();
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use(express.json());
 app.use(cookieParser());
